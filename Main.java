@@ -6,6 +6,55 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import java.awt.BasicStroke;
 
+class Path {
+    Node head;
+    Node tail;
+
+    public class Node {
+        int d;
+        Node next;
+
+        Node() {
+            this.next = null;
+        }
+
+        Node(int data) {
+            d = data;
+            next = null;
+        }
+    }
+
+    public Node createPath() {
+        Node[] red = new Node[12];
+        Node[] green = new Node[12];
+        Node[] blue = new Node[12];
+        Node[] yellow = new Node[12];
+        for (int i = 0; i < 12; i++) {
+            red[i].data = 0;
+            green[i].data = 1;
+            yellow[i].data = 2;
+            blue[i].data = 3;
+        }
+        Node redtail = new Node(0);
+        Node greentail = new Node(1);
+        Node yellowtail = new Node(2);
+        Node bluetail = new Node(3);
+        Node[] path = new Node[4];
+        path[0] = red[0];
+        path[1] = green[0];
+        path[2] = yellow[0];
+        path[3] = blue[0];
+        red[11].next = redtail;
+        green[11].next = greentail;
+        yellow[11].next = yellowtail;
+        blue[11].next = bluetail;
+        redtail.next = green[0];
+        greentail.next = yellow[0];
+        yellowtail.next = blue[0];
+        bluetail.next = red[0];
+    }
+}
+
 class Layout extends JPanel {
     int x, y, width, height;
 
